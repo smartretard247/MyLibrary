@@ -14,14 +14,15 @@ import Interfaces.IBinaryTreeNode;
  * @author Jeezy
  * @param <T>
  */
-public class CBinaryTreeNode<T> implements IBinaryTreeNode<T> {
+public class BinaryTreeNode<T> implements IBinaryTreeNode<T> {
     protected T item;
-    CBinaryTreeNode left, right;
+    BinaryTreeNode left;
+    BinaryTreeNode right;
     
-    public CBinaryTreeNode() {
+    public BinaryTreeNode() {
     }
     
-    public CBinaryTreeNode(T item) {
+    public BinaryTreeNode(T item) {
         this.item = item;
     }
     
@@ -42,25 +43,25 @@ public class CBinaryTreeNode<T> implements IBinaryTreeNode<T> {
     }
 
     @Override
-    public CBinaryTreeNode getLeftChild() {
+    public BinaryTreeNode getLeftChild() {
         return this.left;
     }
 
     @Override
-    public CBinaryTreeNode getRightChild() {
+    public BinaryTreeNode getRightChild() {
         return this.right;
     }
 
     @Override
-    public CBinaryTreeNode insertLeftChild(IBinaryTreeNode node, T item) {
-        left = (CBinaryTreeNode)node;
+    public BinaryTreeNode insertLeftChild(IBinaryTreeNode node, T item) {
+        left = (BinaryTreeNode)node;
         left.item = item;
         return left;
     }
 
     @Override
-    public CBinaryTreeNode insertRightChild(IBinaryTreeNode node, T item) {
-        right = (CBinaryTreeNode)node;
+    public BinaryTreeNode insertRightChild(IBinaryTreeNode node, T item) {
+        right = (BinaryTreeNode)node;
         right.item = item;
         return right;
     }
@@ -70,7 +71,7 @@ public class CBinaryTreeNode<T> implements IBinaryTreeNode<T> {
         return this.item.toString().compareTo((item.toString()));
     }
     
-    public static String toPreOrderString(CBinaryTreeNode root) {
+    public static String toPreOrderString(BinaryTreeNode root) {
         String preOrder = "";
         if(root != null) {
             preOrder += root.toString() + " ";
@@ -80,7 +81,7 @@ public class CBinaryTreeNode<T> implements IBinaryTreeNode<T> {
         return preOrder;
     }
     
-    public static String toPostOrderString(CBinaryTreeNode root) {
+    public static String toPostOrderString(BinaryTreeNode root) {
         String postOrder = "";
         if(root != null) {
             postOrder += toPostOrderString(root.left);
@@ -90,7 +91,7 @@ public class CBinaryTreeNode<T> implements IBinaryTreeNode<T> {
         return postOrder;
     }
     
-    public static String toInOrderString(CBinaryTreeNode root) {
+    public static String toInOrderString(BinaryTreeNode root) {
         String inOrder = "";
         if(root != null) {
             inOrder += toInOrderString(root.left);

@@ -15,17 +15,17 @@ import java.util.Scanner;
  * @author Jeezy
  * @param <T>
  */
-public class CBinaryTree<T> implements IBinaryTree<T> {
+public class BinaryTree<T> implements IBinaryTree<T> {
     protected String nameOfTree;
-    private CBinaryTreeNode theRoot = new CBinaryTreeNode();
+    private BinaryTreeNode theRoot = new BinaryTreeNode();
     
-    public CBinaryTree() {
+    public BinaryTree() {
         nameOfTree = "Default";
     }
-    public CBinaryTree(String name) {
+    public BinaryTree(String name) {
         nameOfTree = name;
     }
-    public CBinaryTree(Scanner theScanner, boolean ignoreSpaces) {
+    public BinaryTree(Scanner theScanner, boolean ignoreSpaces) {
         nameOfTree = "Default";
         read(theScanner, ignoreSpaces);
     }
@@ -33,11 +33,11 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
     public final void read(Scanner theScanner, boolean ignoreSpaces) {
         if(!ignoreSpaces) {
             while(theScanner.hasNext()) {
-                insertNode(getRoot(), new CBinaryTreeNode(), (T)theScanner.next());
+                insertNode(getRoot(), new BinaryTreeNode(), (T)theScanner.next());
             }
         } else {
             while(theScanner.hasNext()) {
-                insertNode(getRoot(), new CBinaryTreeNode(), (T)theScanner.nextLine());
+                insertNode(getRoot(), new BinaryTreeNode(), (T)theScanner.nextLine());
             }
         }
     }
@@ -52,13 +52,13 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
     }
     
     @Override
-    public final CBinaryTreeNode setRoot(IBinaryTreeNode node) {
-        CBinaryTreeNode newRoot = (CBinaryTreeNode)node;
+    public final BinaryTreeNode setRoot(IBinaryTreeNode node) {
+        BinaryTreeNode newRoot = (BinaryTreeNode)node;
         return theRoot = newRoot;
     }
     
     @Override
-    public CBinaryTreeNode getRoot() {
+    public BinaryTreeNode getRoot() {
         return theRoot;
     }
 
@@ -73,7 +73,7 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
     }
 
     @Override
-    public CBinaryTreeNode findElement(T item) {
+    public BinaryTreeNode findElement(T item) {
         try {
             return this.findElement(getRoot(), item);
         } catch (BinaryTreeException ex) {
@@ -83,9 +83,9 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
     }
     
     @Override
-    public CBinaryTreeNode findElement(IBinaryTreeNode root, T item) throws BinaryTreeException {
-        CBinaryTreeNode currentNode = (CBinaryTreeNode)root;
-        CBinaryTreeNode toFind = new CBinaryTreeNode(item);
+    public BinaryTreeNode findElement(IBinaryTreeNode root, T item) throws BinaryTreeException {
+        BinaryTreeNode currentNode = (BinaryTreeNode)root;
+        BinaryTreeNode toFind = new BinaryTreeNode(item);
         
         if(currentNode.item == null) throw new BinaryTreeException("Node Not Found");
         if(currentNode.item.equals(toFind.item)) return currentNode; //found match at root
@@ -103,15 +103,15 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
     }
 
     @Override
-    public CBinaryTreeNode insertNode(IBinaryTreeNode node, T item) {
-        node = (CBinaryTreeNode)node;
+    public BinaryTreeNode insertNode(IBinaryTreeNode node, T item) {
+        node = (BinaryTreeNode)node;
         return insertNode(theRoot, node, item);
     }
     
     @Override
-    public CBinaryTreeNode insertNode(IBinaryTreeNode root, IBinaryTreeNode node, T item) {
-        CBinaryTreeNode currentNode = (CBinaryTreeNode)root;
-        CBinaryTreeNode toInsert = (CBinaryTreeNode)node;
+    public BinaryTreeNode insertNode(IBinaryTreeNode root, IBinaryTreeNode node, T item) {
+        BinaryTreeNode currentNode = (BinaryTreeNode)root;
+        BinaryTreeNode toInsert = (BinaryTreeNode)node;
         toInsert.item = item;
         
         if(getRoot().item == null) { //then this should be the root
@@ -142,7 +142,7 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
         theRoot.right = null;
     }
     
-    public static int countNodes(CBinaryTreeNode root) {
+    public static int countNodes(BinaryTreeNode root) {
         if(root.item == null) return 0; //empty tree
         int count = 1;
         if(root.left != null) count += countNodes(root.left);
@@ -150,7 +150,7 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
         return count;
     }
     
-    public static String toPreOrderString(CBinaryTreeNode root) {
+    public static String toPreOrderString(BinaryTreeNode root) {
         String preOrder = "";
         if(root != null) {
             preOrder += root.toString() + "\n";
@@ -160,7 +160,7 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
         return preOrder;
     }
     
-    public static String toPostOrderString(CBinaryTreeNode root) {
+    public static String toPostOrderString(BinaryTreeNode root) {
         String postOrder = "";
         if(root != null) {
             postOrder += toPostOrderString(root.left);
@@ -170,7 +170,7 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
         return postOrder;
     }
     
-    public static String toInOrderString(CBinaryTreeNode root) {
+    public static String toInOrderString(BinaryTreeNode root) {
         String inOrder = "";
         if(root != null) {
             inOrder += toInOrderString(root.left);
@@ -191,49 +191,49 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
         
         //in order print the tree
         toReturn += "In Order:\n";
-        toReturn += CBinaryTree.toInOrderString(theRoot);
+        toReturn += BinaryTree.toInOrderString(theRoot);
         toReturn += "\n";
         
         //pre order print the tree
         toReturn += "Pre Order:\n";
-        toReturn += CBinaryTree.toPreOrderString(theRoot);
+        toReturn += BinaryTree.toPreOrderString(theRoot);
         toReturn += "\n";
         
         //post order print the tree
         toReturn += "Post Order:\n";
-        toReturn += CBinaryTree.toPostOrderString(theRoot);
+        toReturn += BinaryTree.toPostOrderString(theRoot);
         
         return toReturn;
     }
     
     public static void main (String args []) {
         //create and run a test case
-        CBinaryTree<Integer> test = new CBinaryTree(); //empty tree
-        test.insertNode(new CBinaryTreeNode(), 7); //insert node
-        test.insertNode(new CBinaryTreeNode(), 2); //insert node
-        test.insertNode(new CBinaryTreeNode(), 1); //insert node
+        BinaryTree<Integer> test = new BinaryTree(); //empty tree
+        test.insertNode(new BinaryTreeNode(), 7); //insert node
+        test.insertNode(new BinaryTreeNode(), 2); //insert node
+        test.insertNode(new BinaryTreeNode(), 1); //insert node
         test.setName("Test 1"); //set the name for output
         System.out.println(test);
         
         //test inserting nodes
-        test.insertNode(new CBinaryTreeNode(), 6);
-        test.insertNode(new CBinaryTreeNode(), 3);
-        test.insertNode(new CBinaryTreeNode(), 8);
-        test.insertNode(new CBinaryTreeNode(), 5);
-        test.insertNode(new CBinaryTreeNode(), 9);
-        test.insertNode(new CBinaryTreeNode(), 4);
+        test.insertNode(new BinaryTreeNode(), 6);
+        test.insertNode(new BinaryTreeNode(), 3);
+        test.insertNode(new BinaryTreeNode(), 8);
+        test.insertNode(new BinaryTreeNode(), 5);
+        test.insertNode(new BinaryTreeNode(), 9);
+        test.insertNode(new BinaryTreeNode(), 4);
         System.out.println(test); //debug again
         
         //find an existing element, then non-existing element
-        CBinaryTreeNode foundNode;
+        BinaryTreeNode foundNode;
         System.out.print("Finding an existing Node: ");
-        foundNode = (CBinaryTreeNode)test.findElement(2); //search for an existing node
+        foundNode = (BinaryTreeNode)test.findElement(2); //search for an existing node
         System.out.println(foundNode);
         System.out.print("Finding a non-existing Node: ");
-        foundNode = (CBinaryTreeNode)test.findElement(0); //0 should not exist in the tree
+        foundNode = (BinaryTreeNode)test.findElement(0); //0 should not exist in the tree
         
         //next test, create using string of characters
-        CBinaryTree<String> test2 = new CBinaryTree(new Scanner("B I N A R Y T R E E"),false); //use the scanner to parse the string
+        BinaryTree<String> test2 = new BinaryTree(new Scanner("B I N A R Y T R E E"),false); //use the scanner to parse the string
         test2.setName("My Binary Tree");
         System.out.println(test2);
         System.out.print("Finding all elements: ");
@@ -252,7 +252,7 @@ public class CBinaryTree<T> implements IBinaryTree<T> {
         
         //next test, use input from a file
         try {
-            CBinaryTree<String> test3 = new CBinaryTree(new Scanner(new java.io.File("BinaryTreeData.txt")),true);
+            BinaryTree<String> test3 = new BinaryTree(new Scanner(new java.io.File("BinaryTreeData.txt")),true);
             test3.setName("Tree From File");
             System.out.println(test3);
         } catch (FileNotFoundException ex) {

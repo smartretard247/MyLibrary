@@ -11,7 +11,10 @@ package Classes;
  * @author Jeezy
  * @param <T>
  */
-public class CDoublyLinkedListNode<T> {
+public class LinkedListNode<T> {
     public T a; //an object being held
-    public CDoublyLinkedListNode prev, next; //pointer to the next/prev element
+    public LinkedListNode next; //pointer to the next element
+    public boolean hasNext() {
+        return next != null;
+    }
 }
